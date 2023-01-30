@@ -1,0 +1,102 @@
+<div>
+    <mat-form-field>
+        <mat-label>Buscar</mat-label>
+        <input matInput (keyup)="filtrar($event.target.value)" placeholder="Buscar medicamento" #input>
+    </mat-form-field>
+</div>
+
+<div  class="mat-elevation-z8">    
+    
+    <table mat-table [dataSource]="dataSource" matSort>
+    
+        <ng-container matColumnDef="idMedicamento">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Código </th>
+            <td mat-cell *matCellDef="let element"> {{element.idMedicamento}} </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="nombre">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
+            <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="laboratorio">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Laboratorio </th>
+            <td mat-cell *matCellDef="let element"> {{element.laboratorio.nombre}} </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="fechaFabricacion">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha Fabricación </th>
+            <td mat-cell *matCellDef="let element"> {{element.fechaFabricacion}} </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="fechaVencimiento">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha Vencimiento </th>
+            <td mat-cell *matCellDef="let element"> {{element.fechaVencimiento}} </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="cantidadStock">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Stock </th>
+            <td mat-cell *matCellDef="let element"> {{element.cantidadStock}} </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="valorUnitario">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Valor Unitario </th>
+            <td mat-cell *matCellDef="let element"> {{element.valorUnitario}} </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="editar-eliminar-vender">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let raw">
+                <button mat-button color="primary" (click)="openModal(raw)">
+                    <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-button color="warn" (click)="onDelete(raw.idMedicamento)">
+                    <mat-icon>delete_forever</mat-icon>
+                </button>
+                <button mat-button (click)="onBuy()">
+                    <mat-icon>shopping_cart</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+    
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    
+        <!-- Row shown when there is no matching data. -->
+        <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+        </tr>
+    </table>
+    
+    <mat-paginator [length]="100" [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 100]" [length]="cant" (page)="Paginator($event)" ></mat-paginator>
+</div>
+
+<button mat-button color="accent" (click)="openModal()" style="float: right;">
+    <mat-icon>add_circle</mat-icon>
+</button>
+
+
+<!-- <table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Laboratorio</th>
+            <th>Fecha Vencimiento</th>
+            <th>Fecha Fabricación</th>
+            <th>Cantidad</th>
+            <th>Valor Unitario</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let m of medicamento">
+            <td>{{m.idMedicamento}}</td>
+            <td>{{m.nombre}}</td>
+            <td>{{m.laboratorio.nombre}}</td>
+            <td>{{m.fechaFabricacion}}</td>
+            <td>{{m.fechaVencimiento}}</td>
+            <td>{{m.cantidadStock}}</td>
+            <td>{{m.valorUnitario}}</td>
+        </tr>
+    </tbody>
+</table> -->

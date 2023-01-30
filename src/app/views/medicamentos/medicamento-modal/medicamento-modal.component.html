@@ -1,0 +1,41 @@
+<mat-form-field appearance="fill">
+    <mat-label>Nombre</mat-label>
+    <input matInput placeholder="Nombre" [(ngModel)]="medicamento.nombre">
+</mat-form-field>
+
+<mat-form-field appearance="fill">
+    <mat-label>Fecha Fabricación</mat-label>
+    <input matInput placeholder="Fecha Fabricación" [(ngModel)]="medicamento.fechaFabricacion">
+</mat-form-field>
+
+<mat-form-field appearance="fill">
+    <mat-label>Fecha Vencimiento</mat-label>
+    <input matInput placeholder="Fecha Vencimiento" [(ngModel)]="medicamento.fechaVencimiento">
+</mat-form-field>
+
+<mat-form-field appearance="fill">
+    <mat-label>Stock</mat-label>
+    <input matInput placeholder="Stock" [(ngModel)]="medicamento.cantidadStock">
+</mat-form-field>
+
+<mat-form-field appearance="fill">
+    <mat-label>Valor Unitario</mat-label>
+    <input matInput placeholder="Valor Unitario" [(ngModel)]="medicamento.valorUnitario">
+</mat-form-field>
+
+<mat-form-field appearance="fill">
+    <mat-label *ngIf="medicamento.laboratorio">{{medicamento.laboratorio.nombre}} </mat-label>
+    <mat-select matInput placeholder="Seleccione el laboratorio" [(ngModel)]="medicamento.laboratorio">
+        <mat-option *ngFor="let p of laboratorio" [value]='p'> 
+            {{p.nombre}}
+        </mat-option>       
+    </mat-select>
+</mat-form-field>
+
+<button mat-button color="primary" (click)="aceptar()">
+   Aceptar
+</button>   
+
+<button mat-button color="primary" (click)="cerrar()">
+    Cancelar
+ </button> 
